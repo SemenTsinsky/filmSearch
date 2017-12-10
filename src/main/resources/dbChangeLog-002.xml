@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet id="001" author="semen">
+        <insert tableName="users">
+            <column name="user_name" value="sanya"/>
+            <column name="password" value="sahsaanya"/>
+        </insert>
+        <insert tableName="users">
+            <column name="user_name" value="serega"/>
+            <column name="password" value="knifeVBochinu"/>
+        </insert>
+        <insert tableName="users">
+            <column name="user_name" value="danil"/>
+            <column name="password" value="parol"/>
+        </insert>
+        <insert tableName="users">
+            <column name="user_name" value="leha"/>
+            <column name="password" value="leha_loh"/>
+        </insert>
+        <rollback>
+            <delete tableName="users">
+                <where>user_name='sanya'</where>
+            </delete>
+            <delete tableName="users">
+                <where>user_name='serega'</where>
+            </delete>
+            <delete tableName="users">
+                <where>user_name='danil'</where>
+            </delete>
+            <delete tableName="users">
+                <where>user_name='leha'</where>
+            </delete>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="002" author="semen">
+        <insert tableName="producers">
+            <column name="name" value="Sanya"/>
+            <column name="birth_date" value="1999-01-15"/>
+        </insert>
+        <insert tableName="producers">
+            <column name="name" value="Danil"/>
+            <column name="birth_date" value="2000-11-01"/>
+        </insert>
+        <insert tableName="producers">
+            <column name="name" value="Jon S. Baird"/>
+            <column name="birth_date" value="1980-03-23"/>
+        </insert>
+        <rollback>
+            <delete tableName="producers">
+                <where>name='Sanya'</where>
+            </delete>
+            <delete tableName="producers">
+                <where>name='Danil'</where>
+            </delete>
+            <delete tableName="producers">
+                <where>name='Jon S. Baird'</where>
+            </delete>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="003" author="semen">
+        <insert tableName="films">
+            <column name="film_name" value="filth"/>
+            <column name="year" value="2010"/>
+            <column name="rating" value="8.2"/>
+            <column name="producer_id" value="3"/>
+        </insert>
+        <insert tableName="films">
+            <column name="film_name" value="disaster"/>
+            <column name="year" value="2017"/>
+            <column name="rating" value="10"/>
+            <column name="producer_id" value="1"/>
+        </insert>
+        <insert tableName="films">
+            <column name="film_name" value="speed"/>
+            <column name="year" value="2015"/>
+            <column name="rating" value="7.8"/>
+            <column name="producer_id" value="1"/>
+        </insert>
+        <insert tableName="films">
+            <column name="film_name" value="I am legend"/>
+            <column name="year" value="1999"/>
+            <column name="rating" value="8.3"/>
+            <column name="producer_id" value="2"/>
+        </insert>
+        <insert tableName="films">
+            <column name="film_name" value="Mouvie 43"/>
+            <column name="year" value="2011"/>
+            <column name="rating" value="4.3"/>
+            <column name="producer_id" value="2"/>
+        </insert>
+        <rollback>
+            <delete tableName="films">
+                <where>film_name='filth'</where>
+            </delete>
+            <delete tableName="films">
+                <where>film_name='disaster'</where>
+            </delete>
+            <delete tableName="films">
+                <where>film_name='speed'</where>
+            </delete>
+            <delete tableName="films">
+                <where>film_name='I am legend'</where>
+            </delete>
+            <delete tableName="films">
+                <where>film_name='Mouvie 43'</where>
+            </delete>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="004" author="semen">
+        <insert tableName="marks">
+            <column name="user_id" value="1"/>
+            <column name="film_id" value="2"/>
+            <column name="mark" value="10"/>
+        </insert>
+        <insert tableName="marks">
+            <column name="user_id" value="1"/>
+            <column name="film_id" value="4"/>
+            <column name="mark" value="8"/>
+        </insert>
+        <insert tableName="marks">
+            <column name="user_id" value="1"/>
+            <column name="film_id" value="3"/>
+            <column name="mark" value="9"/>
+        </insert>
+        <insert tableName="marks">
+            <column name="user_id" value="2"/>
+            <column name="film_id" value="5"/>
+            <column name="mark" value="7"/>
+        </insert>
+        <insert tableName="marks">
+            <column name="user_id" value="2"/>
+            <column name="film_id" value="2"/>
+            <column name="mark" value="9"/>
+        </insert>
+        <insert tableName="marks">
+            <column name="user_id" value="2"/>
+            <column name="film_id" value="1"/>
+            <column name="mark" value="5"/>
+        </insert>
+        <insert tableName="marks">
+            <column name="user_id" value="3"/>
+            <column name="film_id" value="4"/>
+            <column name="mark" value="4"/>
+        </insert>
+        <insert tableName="marks">
+            <column name="user_id" value="3"/>
+            <column name="film_id" value="2"/>
+            <column name="mark" value="8"/>
+        </insert>
+        <insert tableName="marks">
+            <column name="user_id" value="3"/>
+            <column name="film_id" value="1"/>
+            <column name="mark" value="8"/>
+        </insert>
+        <insert tableName="marks">
+            <column name="user_id" value="3"/>
+            <column name="film_id" value="3"/>
+            <column name="mark" value="9"/>
+        </insert>
+        <insert tableName="marks">
+            <column name="user_id" value="3"/>
+            <column name="film_id" value="5"/>
+            <column name="mark" value="8"/>
+        </insert>
+        <insert tableName="marks">
+            <column name="user_id" value="4"/>
+            <column name="film_id" value="1"/>
+            <column name="mark" value="9"/>
+        </insert>
+        <insert tableName="marks">
+            <column name="user_id" value="4"/>
+            <column name="film_id" value="4"/>
+            <column name="mark" value="8"/>
+        </insert>
+        <insert tableName="marks">
+            <column name="user_id" value="4"/>
+            <column name="film_id" value="5"/>
+            <column name="mark" value="4"/>
+        </insert>
+        <insert tableName="marks">
+            <column name="user_id" value="4"/>
+            <column name="film_id" value="3"/>
+            <column name="mark" value="7"/>
+        </insert>
+        <rollback>
+            <delete tableName="marks">
+                <where>user_id=1 and film_id=2</where>
+            </delete>
+            <delete tableName="marks">
+                <where>user_id=1 and film_id=4</where>
+            </delete>
+            <delete tableName="marks">
+                <where>user_id=1 and film_id=3</where>
+            </delete>
+            <delete tableName="marks">
+                <where>user_id=2 and film_id=2</where>
+            </delete>
+            <delete tableName="marks">
+                <where>user_id=2 and film_id=5</where>
+            </delete>
+            <delete tableName="marks">
+                <where>user_id=2 and film_id=1</where>
+            </delete>
+            <delete tableName="marks">
+                <where>user_id=3 and film_id=1</where>
+            </delete>
+            <delete tableName="marks">
+                <where>user_id=3 and film_id=2</where>
+            </delete>
+            <delete tableName="marks">
+                <where>user_id=3 and film_id=3</where>
+            </delete>
+            <delete tableName="marks">
+                <where>user_id=3 and film_id=4</where>
+            </delete>
+            <delete tableName="marks">
+                <where>user_id=3 and film_id=5</where>
+            </delete>
+            <delete tableName="marks">
+                <where>user_id=4 and film_id=1</where>
+            </delete>
+            <delete tableName="marks">
+                <where>user_id=4 and film_id=3</where>
+            </delete>
+            <delete tableName="marks">
+                <where>user_id=4 and film_id=4</where>
+            </delete>
+            <delete tableName="marks">
+                <where>user_id=4 and film_id=5</where>
+            </delete>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="005" author="semen">
+        <insert tableName="hold_over">
+            <column name="user_id" value="1"/>
+            <column name="film_id" value="1"/>
+        </insert>
+        <insert tableName="hold_over">
+            <column name="user_id" value="2"/>
+            <column name="film_id" value="4"/>
+        </insert>
+        <insert tableName="hold_over">
+            <column name="user_id" value="4"/>
+            <column name="film_id" value="2"/>
+        </insert>
+        <rollback>
+            <delete tableName="hold_over">
+                <where>user_id=1 and film_id=1</where>
+            </delete>
+            <delete tableName="hold_over">
+                <where>user_id=2 and film_id=4</where>
+            </delete>
+            <delete tableName="hold_over">
+                <where>user_id=4 and film_id=2</where>
+            </delete>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="tag" author="semen">
+        <tagDatabase tag="changelog_002"/>
+    </changeSet>
+
+</databaseChangeLog>

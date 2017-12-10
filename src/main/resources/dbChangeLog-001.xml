@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet id="001" author="semen">
+        <createTable tableName="users">
+            <column name="id" type="int" autoIncrement="true"/>
+            <column name="user_name" type="varchar(30)"/>
+            <column name="password" type="varchar(30)"/>
+        </createTable>
+        <addNotNullConstraint tableName="users" columnName="password"/>
+        <addNotNullConstraint tableName="users" columnName="user_name"/>
+        <addPrimaryKey tableName="users" columnNames="id"/>
+        <rollback>
+            <dropTable tableName="users" cascadeConstraints="true"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="002" author="semen">
+        <createTable tableName="producers">
+            <column name="id" autoIncrement="true" type="int"/>
+            <column name="name" type="varchar(20)"/>
+            <column name="birth_date" type="date"/>
+        </createTable>
+        <addNotNullConstraint tableName="producers" columnName="name"/>
+        <addPrimaryKey tableName="producers" columnNames="id"/>
+        <rollback>
+            <dropTable tableName="producers" cascadeConstraints="true"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="003" author="semen">
+        <createTable tableName="films">
+            <column name="film_id" autoIncrement="true" type="int"/>
+            <column name="film_name" type="varchar(50)"/>
+            <column name="year" type="int"/>
+            <column name="rating" type="real"/>
+            <column name="producer_id" type="int">
+                <constraints nullable="false" foreignKeyName="fk_producer_id" references="producers(id)"/>
+            </column>
+        </createTable>
+        <addPrimaryKey tableName="films" columnNames="film_id"/>
+        <addNotNullConstraint tableName="films" columnName="film_name"/>
+        <sql>
+            ALTER TABLE films ADD CONSTRAINT rating_check CHECK(rating &gt;= 0 AND rating &lt;= 10);
+        </sql>
+        <rollback>
+            <dropTable tableName="films" cascadeConstraints="true"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="004" author="semen">
+        <createTable tableName="marks">
+            <column name="mark_id" type="int" autoIncrement="true"/>
+            <column name="user_id" type="int">
+                <constraints nullable="false" foreignKeyName="fk_user_id" references="users(id)"/>
+            </column>
+            <column name="film_id" type="int">
+                <constraints nullable="false" foreignKeyName="fk_film_id" references="films(film_id)"/>
+            </column>
+            <column name="mark" type="int"/>
+        </createTable>
+        <addPrimaryKey tableName="marks" columnNames="mark_id"/>
+        <sql>
+            ALTER TABLE marks ADD CONSTRAINT mark_check CHECK(mark &gt;= 0 AND mark &lt;= 10);
+        </sql>
+        <rollback>
+            <dropTable tableName="marks" cascadeConstraints="true"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="005" author="semen">
+        <createTable tableName="hold_over">
+            <column name="user_id" type="int">
+                <constraints nullable="false" foreignKeyName="fk_user_name" references="users(id)"/>
+            </column>
+            <column name="film_id" type="int">
+                <constraints nullable="false" foreignKeyName="fk_film_id" references="films(film_id)"/>
+            </column>
+        </createTable>
+        <addPrimaryKey tableName="hold_over" columnNames="user_id, film_id"/>
+        <rollback>
+            <dropTable tableName="hold_over" cascadeConstraints="true"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="tag" author="semen">
+        <tagDatabase tag="changelog_001"/>
+    </changeSet>
+
+</databaseChangeLog>
