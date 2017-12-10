@@ -3,10 +3,11 @@ package org.sementsinsky.filmSearch.entities;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.UUID;
 
 @Entity
 @Table(name="marks")
-public class Mark implements IEntity<Integer>{
+public class Mark implements IEntity<UUID>{
 
     @ManyToOne
     @JoinColumn(name="user_id")
@@ -31,7 +32,7 @@ public class Mark implements IEntity<Integer>{
             })
     @GeneratedValue(generator = "mark_id_seq")
     @Column(name = "mark_id")
-    private Integer Id;
+    private UUID Id;
 
     public Mark(){}
 
@@ -41,11 +42,11 @@ public class Mark implements IEntity<Integer>{
         this.mark = mark;
     }
 
-    public Integer getId() {
+    public UUID getId() {
         return Id;
     }
 
-    public void setId(Integer Id){
+    public void setId(UUID Id){
         this.Id = Id;
     }
 

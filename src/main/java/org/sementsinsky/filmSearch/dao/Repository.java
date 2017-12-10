@@ -2,6 +2,8 @@ package org.sementsinsky.filmSearch.dao;
 
 import java.lang.Integer;
 import java.util.List;
+import java.util.UUID;
+
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -13,7 +15,7 @@ import org.sementsinsky.filmSearch.utils.HibernateUtil;
 
 import javax.persistence.Query;
 
-public class Repository<T extends IEntity> implements IRepository<T, Integer> {
+public class Repository<T extends IEntity> implements IRepository<T> {
     private Session session;
     private Transaction transaction;
     private Class<T> type;
@@ -79,14 +81,10 @@ public class Repository<T extends IEntity> implements IRepository<T, Integer> {
     }
 
     public List<T> getAll() {
-//        ClassMetadata hibernateMetaData = session.getSessionFactory().getClassMetadata(type);
-//        AbstractEntityPersister persister = (AbstractEntityPersister) hibernateMetaData;
-//        String tableName = persister.getTableName();
-//        Query query = session.createQuery("from "+tableName);
         return session.createCriteria(type).list();
     }
 
-    public T getById(Integer id){
+    public T getById(UUID id){
         return (T) session.get(type, id);
     }
 

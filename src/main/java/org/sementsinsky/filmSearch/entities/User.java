@@ -5,10 +5,11 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
 
 @Entity
 @Table(name="users")
-public class User implements IEntity<Integer>{
+public class User implements IEntity<UUID>{
     @Id
     @GenericGenerator(
             name = "user_id_seq",
@@ -21,7 +22,7 @@ public class User implements IEntity<Integer>{
             })
     @GeneratedValue(generator = "user_id_seq")
     @Column(name="id")
-    private Integer id;
+    private UUID id;
 
     @Column(name="user_name", unique = true, nullable = false)
     private String username;
@@ -42,11 +43,11 @@ public class User implements IEntity<Integer>{
         this.password = password;
     }
 
-    public void setId(Integer id){
+    public void setId(UUID id){
         this.id = id;
     }
 
-    public Integer getId(){
+    public UUID getId(){
         return id;
     }
 

@@ -1,7 +1,6 @@
 package org.sementsinsky.filmSearch.entities;
 
-public interface IEntity<T extends Number> {
-
-    T getId();
-    void setId(T id);
+public interface IEntity<UUID> {
+    UUID getId();
+    void setId(UUID id);
 }

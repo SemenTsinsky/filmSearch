@@ -5,10 +5,11 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
 
 @Entity
 @Table(name = "films")
-public class Film implements IEntity<Integer>{
+public class Film implements IEntity<UUID>{
 
     @Id
     @GenericGenerator(
@@ -22,7 +23,7 @@ public class Film implements IEntity<Integer>{
             })
     @GeneratedValue(generator = "film_id_generator")
     @Column(name = "film_id")
-    protected Integer id;
+    protected UUID id;
 
     @Column(name="film_name")
     private String name;
@@ -46,11 +47,11 @@ public class Film implements IEntity<Integer>{
         this.year = year;
     }
 
-    public Integer getId(){
+    public UUID getId(){
         return id;
     }
 
-    public void setId(Integer id){
+    public void setId(UUID id){
         this.id = id;
     }
 

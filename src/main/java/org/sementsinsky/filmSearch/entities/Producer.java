@@ -4,11 +4,12 @@ import org.hibernate.annotations.GenericGenerator;
 
 import java.util.Date;
 import java.util.Set;
+import java.util.UUID;
 import javax.persistence.*;
 
 @Entity
 @Table(name="producers")
-public class Producer implements IEntity<Integer>{
+public class Producer implements IEntity<UUID>{
     @Id
     @GenericGenerator(
             name = "producer_id_seq",
@@ -21,7 +22,7 @@ public class Producer implements IEntity<Integer>{
             })
     @GeneratedValue(generator = "producer_id_seq")
     @Column(name="id")
-    private Integer id;
+    private UUID id;
 
     @Column(name="name")
     private String name;
@@ -36,11 +37,11 @@ public class Producer implements IEntity<Integer>{
         this.birthDate = birthDate;
     }
 
-    public Integer getId(){
+    public UUID getId(){
         return id;
     }
 
-    public void setId(Integer id){
+    public void setId(UUID id){
         this.id = id;
     }
 
