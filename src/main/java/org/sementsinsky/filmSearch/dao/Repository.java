@@ -24,40 +24,24 @@ public class Repository<T extends IEntity> implements IRepository<T> {
         this.type = type;
     }
 
-    public Session OpenSession(){
+    private Session openSession(){
         session = HibernateUtil.buildSessionAnnotation();
         return session;
     }
 
-    public Session openSessionWithTransacion(){
+    public Session openSessionWithTransaction(){
         session = HibernateUtil.buildSessionAnnotation();
         this.transaction = session.beginTransaction();
         return session;
     }
 
-    public void closeSession(){
+    private void closeSession(){
         session.close();
     }
 
     public void closeSessionWithTransaction(){
         transaction.commit();
         session.close();
-    }
-
-    public Session getSession(){
-        return session;
-    }
-
-    public void setSession(Session session){
-        this.session = session;
-    }
-
-    public Transaction getTransaction() {
-        return transaction;
-    }
-
-    public void setTransaction(Transaction transaction){
-        this.transaction = transaction;
     }
 
     public void persist(T entity){

@@ -47,6 +47,12 @@ public class Film implements IEntity<UUID>{
         this.year = year;
     }
 
+    public Film(String name, double rating, int year){
+        this.name = name;
+        this.rating = rating;
+        this.year = year;
+    }
+
     public UUID getId(){
         return id;
     }

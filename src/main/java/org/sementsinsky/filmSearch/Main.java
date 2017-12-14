@@ -1,11 +1,9 @@
 package org.sementsinsky.filmSearch;
 
-import org.hibernate.PersistentObjectException;
 import org.sementsinsky.filmSearch.dao.Repository;
 import org.sementsinsky.filmSearch.entities.*;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
@@ -16,11 +14,11 @@ public class Main {
         Repository<Film> filmRepository = new Repository<>(Film.class);
         Repository<Mark> markRepository = new Repository<>(Mark.class);
         try {
-            producerRepository.openSessionWithTransacion();
+            producerRepository.openSessionWithTransaction();
             List<Producer> producers = producerRepository.getAll();
             producerRepository.closeSessionWithTransaction();
             System.out.println("get producers");
-            filmRepository.openSessionWithTransacion();
+            filmRepository.openSessionWithTransaction();
             Random random = new Random();
             List<Film> films = new ArrayList<>();
             for(Producer producer:producers){
@@ -33,7 +31,7 @@ public class Main {
             }
             filmRepository.closeSessionWithTransaction();
             System.out.println("films added");
-            userRepository.openSessionWithTransacion();
+            userRepository.openSessionWithTransaction();
             List<User> users = new ArrayList<>();
             for(int i = 0; i < 1000; i++){
                 users.add(new User("user"+i,"password"+i));
@@ -44,7 +42,7 @@ public class Main {
             userRepository.closeSessionWithTransaction();
             System.out.println("users added");
             List<Mark> marks = new ArrayList<>();
-            markRepository.openSessionWithTransacion();
+            markRepository.openSessionWithTransaction();
             for(User user : users){
                 for(Film film : films){
                     marks.add(new Mark(user,film,random.nextInt()*10));
@@ -56,7 +54,7 @@ public class Main {
             }
             markRepository.closeSessionWithTransaction();
             System.out.println("marks added");
-            userRepository.openSessionWithTransacion();
+            userRepository.openSessionWithTransaction();
             for(User user : users){
                 userRepository.update(user);
             }
