@@ -87,18 +87,12 @@ public class FilmTest {
         Assert.assertTrue(films.size() == 4);
     }
 
-    @Test
-    public void deleteTest(){
-        repository.delete(film);
-        Assert.assertTrue(repository.getById(film.getId()) == null);
-    }
-
     @AfterClass
     public static void tearDown(){
-        producerRepository.delete(producer);
         repository.delete(film1);
         repository.delete(film2);
         repository.delete(film3);
         repository.delete(film);
+        producerRepository.delete(producer);
     }
 }

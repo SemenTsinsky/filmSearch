@@ -7,7 +7,6 @@ import org.sementsinsky.filmSearch.entities.Producer;
 import org.sementsinsky.filmSearch.entities.User;
 
 import java.util.Date;
-import java.util.List;
 import java.util.Set;
 
 public class UserTest {
@@ -76,15 +75,9 @@ public class UserTest {
         Assert.assertTrue(!films.contains(film));
     }
 
-    @Test
-    public void deleteTest(){
-        repository.delete(user);
-        Assert.assertTrue(repository.getById(user.getId()) == null);
-    }
-
     @AfterClass
     public static void tearDown(){
-        repository.deleteMark(mark);
+//        repository.deleteMark(mark);
         repository.delete(user);
         filmRepository.delete(film);
         producerRepository.delete(producer);
