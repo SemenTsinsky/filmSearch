@@ -11,9 +11,12 @@ import java.util.UUID;
 @Table(name="users")
 public class User implements IEntity<UUID>{
     @Id
-    @GeneratedValue(generator = "uuid2")
-    @GenericGenerator(name = "uuid2", strategy = "uuid2")
-    @Column(name="id", columnDefinition="BINARY(16)")
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(
+            name = "UUID",
+            strategy = "org.hibernate.id.UUIDGenerator"
+    )
+    @Column(name = "id", updatable = false, nullable = false)
     private UUID id;
 
     @Column(name="user_name", unique = true, nullable = false)

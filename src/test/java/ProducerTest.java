@@ -6,7 +6,6 @@ import org.sementsinsky.filmSearch.dao.ProducerRepository;
 import org.sementsinsky.filmSearch.dao.Repository;
 import org.sementsinsky.filmSearch.entities.Film;
 import org.sementsinsky.filmSearch.entities.Producer;
-import sun.applet.AppletSecurityException;
 
 import java.util.Date;
 import java.util.List;

@@ -20,9 +20,12 @@ public class Mark implements IEntity<UUID>{
     private int mark;
 
     @Id
-    @GeneratedValue(generator = "uuid2")
-    @GenericGenerator(name = "uuid2", strategy = "uuid2")
-    @Column(name="mark_id", columnDefinition="BINARY(16)")
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(
+            name = "UUID",
+            strategy = "org.hibernate.id.UUIDGenerator"
+    )
+    @Column(name = "mark_id", updatable = false, nullable = false)
     private UUID Id;
 
     public Mark(){}
