@@ -13,7 +13,7 @@ addons:
   postgresql: "9.6"
 
 env:
-  -CODACY_PROJECT_TOKEN=b27190ee4d964651b643680330fc175b
+  -CODACY_PROJECT_TOKEN=5f509348c6914a8296a9fe873223fcf4
 
 install:
   ./gradlew assemble
