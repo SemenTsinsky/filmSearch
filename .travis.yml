@@ -12,6 +12,9 @@ before_script:
 addons:
   postgresql: "9.6"
 
+env:
+  -CODACY_PROJECT_TOKEN=b27190ee4d964651b643680330fc175b
+
 install:
   ./gradlew assemble
 
