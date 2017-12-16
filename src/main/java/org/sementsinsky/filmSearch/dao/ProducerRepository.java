@@ -10,7 +10,7 @@ import java.util.List;
 
 public class ProducerRepository extends Repository<Producer> {
 
-    ProducerRepository(Class<Producer> type){
+    public ProducerRepository(Class<Producer> type){
         super(type);
     }
 
@@ -18,7 +18,7 @@ public class ProducerRepository extends Repository<Producer> {
         Session session = openSession();
 
         Criteria criteria = session.createCriteria(Film.class);
-        criteria.add(Restrictions.eq("producer_id",producer.getId()));
+        criteria.add(Restrictions.eq("producer",producer.getId()));
         List<Film> films = criteria.list();
 
         closeSession();

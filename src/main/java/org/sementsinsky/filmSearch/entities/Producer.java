@@ -10,18 +10,11 @@ import javax.persistence.*;
 @Entity
 @Table(name="producers")
 public class Producer implements IEntity<UUID>{
+
     @Id
-    @GenericGenerator(
-            name = "producer_id_seq",
-            strategy = "sequence",
-            parameters = {
-                    @org.hibernate.annotations.Parameter(
-                            name = "sequence",
-                            value = "producer_id_seq"
-                    )
-            })
-    @GeneratedValue(generator = "producer_id_seq")
-    @Column(name="id")
+    @GeneratedValue(generator = "uuid2")
+    @GenericGenerator(name = "uuid2", strategy = "uuid2")
+    @Column(name="id", columnDefinition="BINARY(16)")
     private UUID id;
 
     @Column(name="name")
@@ -63,8 +56,7 @@ public class Producer implements IEntity<UUID>{
 
     @Override
     public String toString(){
-        return  "{name='"+name+'\''+
-                ",birthDate='"+birthDate+"'}";
+        return  "{name='"+name+'\''+"}";
     }
 
     public boolean equals(Producer producer){

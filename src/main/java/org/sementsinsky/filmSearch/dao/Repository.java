@@ -24,55 +24,73 @@ public class Repository<T extends IEntity> implements IRepository<T> {
         this.type = type;
     }
 
-    private Session openSession(){
+    protected Session openSession(){
         session = HibernateUtil.buildSessionAnnotation();
         return session;
     }
 
-    public Session openSessionWithTransaction(){
+    protected Session openSessionWithTransaction(){
         session = HibernateUtil.buildSessionAnnotation();
         this.transaction = session.beginTransaction();
         return session;
     }
 
-    private void closeSession(){
+    protected void closeSession(){
         session.close();
     }
 
-    public void closeSessionWithTransaction(){
+    protected void closeSessionWithTransaction(){
         transaction.commit();
         session.close();
     }
 
     public void persist(T entity){
-        session.save(entity);
+        openSessionWithTransaction();
+        session.persist(entity);
+        closeSessionWithTransaction();
     }
 
     public T getByValue(String field, String value){
+        openSession();
         Criteria criteria = session.createCriteria(type);
         criteria.add(Restrictions.eq(field,value));
-        return (T) criteria.uniqueResult();
+        T object = (T) criteria.uniqueResult();
+        closeSession();
+        return object;
     }
 
     public List<T> getASetByValue(String field, String value){
+        openSession();
         Criteria criteria = session.createCriteria(type);
         criteria.add(Restrictions.eq(field,value));
-        return criteria.list();
+        List<T> objects = criteria.list();
+        closeSession();
+        return objects;
     }
 
     public void update(T entity){
+        openSessionWithTransaction();
         session.update(entity);
+        closeSessionWithTransaction();
     }
 
     public List<T> getAll() {
-        return session.createCriteria(type).list();
+        openSession();
+        List<T> objects = session.createCriteria(type).list();
+        closeSession();
+        return objects;
     }
 
     public T getById(UUID id){
-        return (T) session.get(type, id);
+        openSession();
+        T object = (T) session.get(type, id);
+        closeSession();
+        return object;
     }
 
     public void delete(T entity){
+        openSessionWithTransaction();
         session.delete(entity);
+        closeSessionWithTransaction();
     }
 }

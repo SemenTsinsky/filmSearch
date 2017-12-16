@@ -10,7 +10,7 @@ import org.sementsinsky.filmSearch.entities.User;
 import java.util.List;
 import java.util.Set;
 
-public class UserRepository extends Repository<User> implements IUserRepository{
+public class UserRepository extends Repository<User>{
 
     public UserRepository(Class<User> type) {
         super(type);
@@ -19,20 +19,25 @@ public class UserRepository extends Repository<User> implements IUserRepository{
     public List<Mark> getMarks(User user){
         Session session = openSession();
         Criteria criteria = session.createCriteria(Mark.class);
-        criteria.add(Restrictions.eq("user_id",user.getId()));
+        criteria.add(Restrictions.eq("user",user.getId()));
         List<Mark> marks = criteria.list();
         closeSession();
         return marks;
     }
 
-    public boolean markFilm(User user, Film film, int value){
-        Session session = openSessionWithTransaction();
-        if(value < 0 || value > 10)
-            return false;
-        Mark mark = new Mark(user,film,value);
-        session.save(mark);
-        closeSessionWithTransaction();
+    public boolean markFilm(Mark mark){
+        Repository<Mark> repository = new Repository<>(Mark.class);
+        Session session = repository.openSessionWithTransaction();
+        session.persist(mark);
+        repository.closeSessionWithTransaction();
         return true;
+    }
+
+    public void deleteMark(Mark mark){
+        Repository<Mark> repository = new Repository<>(Mark.class);
+        Session session = repository.openSessionWithTransaction();
+        session.delete(mark);
+        repository.closeSessionWithTransaction();
     }
 
     public void holdOver(User user, Film film){

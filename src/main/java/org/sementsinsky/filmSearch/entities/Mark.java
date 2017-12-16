@@ -21,17 +21,9 @@ public class Mark implements IEntity<UUID>{
     private int mark;
 
     @Id
-    @GenericGenerator(
-            name = "mark_id_seq",
-            strategy = "sequence",
-            parameters = {
-                    @org.hibernate.annotations.Parameter(
-                            name = "sequence",
-                            value = "mark_id_seq"
-                    )
-            })
-    @GeneratedValue(generator = "mark_id_seq")
-    @Column(name = "mark_id")
+    @GeneratedValue(generator = "uuid2")
+    @GenericGenerator(name = "uuid2", strategy = "uuid2")
+    @Column(name="mark_id", columnDefinition="BINARY(16)")
     private UUID Id;
 
     public Mark(){}
@@ -82,6 +74,6 @@ public class Mark implements IEntity<UUID>{
     }
 
     public boolean equals(Mark mark){
-        return this.toString().equals((mark.toString()));
+        return this.toString().equals(mark.toString());
     }
 }

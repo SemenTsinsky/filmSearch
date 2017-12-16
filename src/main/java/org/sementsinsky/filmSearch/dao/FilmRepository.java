@@ -7,7 +7,7 @@ import org.sementsinsky.filmSearch.entities.Film;
 import org.sementsinsky.filmSearch.entities.Mark;
 import java.util.List;
 
-public class FilmRepository extends Repository<Film> implements IFilmRepository {
+public class FilmRepository extends Repository<Film>{
 
     public FilmRepository(Class<Film> type) {
         super(type);
@@ -17,7 +17,7 @@ public class FilmRepository extends Repository<Film> implements IFilmRepository 
         Session session = openSession();
 
         Criteria criteria = session.createCriteria(Mark.class);
-        criteria.add(Restrictions.eq("film_id",film.getId()));
+        criteria.add(Restrictions.eq("film",film.getId()));
 
         List<Mark> marks = criteria.list();
 

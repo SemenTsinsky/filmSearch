@@ -12,18 +12,10 @@ import java.util.UUID;
 public class Film implements IEntity<UUID>{
 
     @Id
-    @GenericGenerator(
-            name = "film_id_generator",
-            strategy = "sequence",
-            parameters = {
-                    @org.hibernate.annotations.Parameter(
-                            name = "sequence",
-                            value = "film_id_seq"
-                    )
-            })
-    @GeneratedValue(generator = "film_id_generator")
-    @Column(name = "film_id")
-    protected UUID id;
+    @GeneratedValue(generator = "uuid2")
+    @GenericGenerator(name = "uuid2", strategy = "uuid2")
+    @Column(name="film_id", columnDefinition="BINARY(16)")
+    private UUID id;
 
     @Column(name="film_name")
     private String name;
